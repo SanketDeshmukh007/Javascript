@@ -1,0 +1,90 @@
+JavaScript's **execution context** is the environment where JavaScript code is executed. To explain it clearly, I'll break it down into two main parts and a diagram.
+
+### 1. **Types of Execution Contexts**
+   - **Global Execution Context**: This is the default context in which JavaScript code runs. It gets created when the script starts running. Everything outside functions runs here.
+   - **Function Execution Context**: Whenever a function is invoked, a new context is created for that function.
+
+### 2. **Components of Execution Context**
+   Each execution context has two main components:
+   - **Memory (Variable Environment)**: Where variables and functions are stored.
+   - **Code (Thread of Execution)**: Where the code is executed line by line.
+
+### Diagram of JavaScript Execution Context
+
+```plaintext
++--------------------------------------+
+|         Global Execution Context     |
+|                                      |
+|   1. Memory (Variable Environment)   |
+|      - Variables                     |
+|      - Functions                     |
+|                                      |
+|   2. Code (Thread of Execution)      |
+|      - Code executed here line by    |
+|        line                          |
++--------------------------------------+
+
+              |
+              V (Function call)
+
++--------------------------------------+
+|      Function Execution Context      |
+|                                      |
+|   1. Memory (Variable Environment)   |
+|      - Local variables               |
+|      - Parameters                    |
+|                                      |
+|   2. Code (Thread of Execution)      |
+|      - Code inside the function is   |
+|        executed line by line         |
++--------------------------------------+
+
+              |
+              V (Another function call)
+          New Function Execution Context
+```
+
+### 3. **How It Works:**
+
+- When a JavaScript program starts, it creates the **Global Execution Context**.
+- If any function is called, a **new Function Execution Context** is created for that function.
+- JavaScript uses a **Call Stack** to manage execution contexts. Each new context is added to the top of the stack when a function is called and removed once the function is done.
+
+### Example:
+
+```js
+let name = "Alice"; // Global Execution Context
+
+function greet() {
+  let greeting = "Hello"; // Function Execution Context
+  console.log(greeting + " " + name);
+}
+
+greet();
+```
+
+**Step-by-Step:**
+1. The code starts in the **Global Execution Context**.
+   - `name = "Alice"` is stored in memory.
+2. When `greet()` is called, a **Function Execution Context** is created.
+   - `greeting = "Hello"` is stored in the function's memory.
+3. After `greet()` finishes executing, its execution context is popped off the stack, and JavaScript returns to the global context.
+
+This is how JavaScript manages execution of your code, using different contexts for different scopes.
+
+The working of the JavaScript works on three phases:
+1. Global Execution Context
+2. Memory phase / Creation phase
+3. Execution phase
+
+Phase 1: Global Execution Context
+The value of `this` keyword is set to Global Execution Context (which is an empty Object in NODE environment, & window object in browser environment)
+
+Phase 2: Memory phase
+During this phase, JS engine scans the code and assigns the initial values for the variables , functions, etc.. For variables they are 'undefined' and for functions they are set to their function definition
+
+Phase 3: Execution phase
+After the creation phase completed, the execution phase begins where actual values of the variables are set. And when the functions are called it creates a new 'Function Execution' context which consists of two phases (they works same as explained above but only for the particular function scope):
+1. Memory phase 
+2. Execution phase 
+The return value of the 'Function Execution' context is passed to the Global Execution Context

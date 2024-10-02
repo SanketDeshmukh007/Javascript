@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chai aur code</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const div = document.createElement('div')
+    console.log(div);
+    div.className = "main"
+    div.id = Math.round(Math.random() * 10 + 1)
+    div.setAttribute('title', 'generated title') // ya step la 1 feri lagti -> direct set krty
+    div.style.backgroundColor = 'orangered'
+    div.style.padding = "12px"
+
+    // div.innerText = "chai aur code" // ya step la 2 ferya lagtyat -> pahile tithla content anty ani mg set krty
+
+    const addText = document.createTextNode("Chai aur code")
+    div.appendChild(addText)
+
+    document.body.appendChild(div)
+</script>
+</html>
